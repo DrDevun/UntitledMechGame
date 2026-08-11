@@ -1,15 +1,31 @@
 [gd_scene format=3 uid="uid://b4u5t22i3s3k1"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_uorgp"]
+[sub_resource type="BoxMesh" id="BoxMesh_n2cey"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_e5kub"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1tmtx"]
+albedo_color = Color(0.2389108, 0.16564879, 0.022138918, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x4ujs"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_plgeh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_68d61"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.078431375)
 
 [node name="StageBlocks" type="Node3D" unique_id=751919432]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=407086700]
-mesh = SubResource("BoxMesh_uorgp")
+[node name="Dirt" type="MeshInstance3D" parent="." unique_id=148612614]
+visible = false
+mesh = SubResource("BoxMesh_n2cey")
+surface_material_override/0 = SubResource("StandardMaterial3D_1tmtx")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=440681317]
+[node name="StaticBody3D" type="StaticBody3D" parent="Dirt" unique_id=1588512405]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=1940376400]
-shape = SubResource("BoxShape3D_e5kub")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dirt/StaticBody3D" unique_id=1439753014]
+shape = SubResource("BoxShape3D_x4ujs")
+
+[node name="Border" type="MeshInstance3D" parent="." unique_id=878581604]
+visible = false
+mesh = SubResource("BoxMesh_plgeh")
+surface_material_override/0 = SubResource("StandardMaterial3D_68d61")

@@ -1,7 +1,7 @@
 extends MeshInstance3D
 
 func _ready() -> void:
-	$"../../CameraController/CameraRayCaster".TileInfo.connect(MoveHighlight)
+	$"../../CameraController/CameraRayCaster".TilePos.connect(MoveHighlight)
 
-func MoveHighlight(TileType, TileCoords, TileLocalPos) : 
+func MoveHighlight(TileCoords, TileLocalPos) : 
 	position = TileLocalPos

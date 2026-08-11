@@ -1,4 +1,8 @@
+class_name TileDictionary
 extends Node
+
+class TestUnit :
+	var HP = 10
 
 class Dirt : 
 	var HP = 1
@@ -12,5 +16,7 @@ func Translator(TileID) :
 			return Stone.new() 
 		1 :
 			return Dirt.new()
+		2 :
+			return TestUnit.new()
 		_ : 
 			return null

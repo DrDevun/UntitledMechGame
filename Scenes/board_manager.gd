@@ -1,59 +1,31 @@
 extends Node
 
-func CreateBoard (Size : Vector3i) : 
-
-	#The logical board is a series of nested arrays.
-	#This function first makes an empty array
-	var Board = []
-
-	#Then pushes or .append([])s an array (width) ammount of times, each array representing an x coordinate
-	for x in range (Size.x) : 
-		Board.append([])
-		
-		#Board[x] gets the array in index x and .append([])s a new array in each one to represent the y coordinates
-		for y in range(Size.y) :
-			Board[x].append([])
-			
-			#Board[x][y] gets the array in index x and inside, gets the array in index y, then .append(null)s null to each array represent the z coordinates
-			for z in range(Size.z) :
-				Board[x][y].append(null)
-	
-	return Board
-	
-func FindBoardSize() : 
-	
-	#.get_used_cells() gives an array filled with vector3is that contain the coordinates of each tile
-	var MinX = $"../GridMap".get_used_cells()[0].x
-	var MinY = $"../GridMap".get_used_cells()[0].y
-	var MinZ = $"../GridMap".get_used_cells()[0].z
-	var MaxX = $"../GridMap".get_used_cells()[0].x
-	var MaxY = $"../GridMap".get_used_cells()[0].y
-	var MaxZ = $"../GridMap".get_used_cells()[0].z
-	
-	for Coords in $"../GridMap".get_used_cells() :
-		if Coords.x <= MinX :
-			MinX = Coords.x
-		if Coords.y <= MinY :
-			MinY = Coords.y
-		if Coords.z <= MinY :
-			MinY = Coords.z
-		if Coords.x >= MaxX :
-			MaxX = Coords.x
-		if Coords.y >= MaxY :
-			MaxY = Coords.y
-		if Coords.z >= MaxZ :
-			MaxZ = Coords.z
-			
-	return Vector3i(MaxX - MinX + 1, MaxY - MinY + 1, MaxZ - MinZ + 1)
-	
-func LoadBoard() :
-	var Board = (CreateBoard(FindBoardSize()))
-	
-	for Coord in $"../GridMap".get_used_cells() :
-		var TileID = $"../GridMap".get_cell_item(Coord)
-		Board[Coord.x][Coord.y][Coord.z] = $TileDictionary.Translator(TileID)
-	
-	print(Board[0][0][0].HP)
+var LastClickedObject = null
+var ObjectPreviousCoords = null
 
 func _ready() -> void:
-	LoadBoard()
+	$"../CameraController/CameraRayCaster".TileType.connect(ObjectSelector)
+
+func MoveObjectTo(TileCoords, TileNormal) :
+	$BoardMaker.Board[TileCoords.x + TileNormal.x][TileCoords.y + TileNormal.y][TileCoords.z + TileNormal.z] = LastClickedObject
+	$BoardMaker.Board[ObjectPreviousCoords.x][ObjectPreviousCoords.y][ObjectPreviousCoords.z] = null
+	$"../Unit".position = $"../GridMap".map_to_local(TileCoords) + TileNormal
+	
+func ObjectSelector(TileCoords, TileNormal) :
+	
+	if LastClickedObject != null :
+		MoveObjectTo(TileCoords, TileNormal)
+		LastClickedObject = null
+
+	if $BoardMaker.Board[TileCoords.x][TileCoords.y][TileCoords.z] is TileDictionary.TestUnit :
+		LastClickedObject = $BoardMaker.Board[TileCoords.x][TileCoords.y][TileCoords.z]
+		ObjectPreviousCoords = TileCoords
+	
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("RMB") :
+		print($BoardMaker.Board[0][1][0])
+		print($BoardMaker.Board[0][1][1])
+		print($BoardMaker.Board[0][0][1])
+		
+
+	

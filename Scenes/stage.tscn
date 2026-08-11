@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://bv608whspgegc"]
 
 [ext_resource type="Script" uid="uid://nai80b85rp6t" path="res://Scenes/player_camera.gd" id="1_70rqm"]
-[ext_resource type="MeshLibrary" uid="uid://b5vbe8j8sr6k4" path="res://MeshLibraries/StageBlocks.tres" id="1_84iix"]
-[ext_resource type="Script" uid="uid://deja1gjnw2y8p" path="res://Scenes/board_manager.gd" id="1_gdy8p"]
+[ext_resource type="Script" uid="uid://dyp7uqehc35jd" path="res://Scenes/board_manager.gd" id="1_gdy8p"]
+[ext_resource type="MeshLibrary" uid="uid://cbibpwbm3fha1" path="res://MeshLibraries/StageBlocks.tres" id="1_gvphh"]
 [ext_resource type="Script" uid="uid://dgon6epfnti5j" path="res://Scenes/tile_dictionary.gd" id="2_gvphh"]
 [ext_resource type="Script" uid="uid://wxu1jkh6ttp7" path="res://Scenes/grid_map.gd" id="2_plxqo"]
 [ext_resource type="Script" uid="uid://dipa2tcslfpma" path="res://Scenes/highlight_mesh.gd" id="3_7nmha"]
 [ext_resource type="Script" uid="uid://c1ao7xrk34y0n" path="res://Scenes/camera_ray_caster.gd" id="4_xgxar"]
-[ext_resource type="Script" uid="uid://clwp31krbqs4t" path="res://Scenes/unit.gd" id="6_i28uy"]
+[ext_resource type="Script" uid="uid://deja1gjnw2y8p" path="res://Scenes/board_maker.gd" id="8_hyud0"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_xgxar"]
 size = Vector3(1.01, 1.01, 1.01)
@@ -44,20 +44,14 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BoardManager" type="Node" parent="." unique_id=782090146]
-script = ExtResource("1_gdy8p")
-
-[node name="TileDictionary" type="Node" parent="BoardManager" unique_id=1026867407]
-script = ExtResource("2_gvphh")
-
 [node name="GridMap" type="GridMap" parent="." unique_id=214189294]
-mesh_library = ExtResource("1_84iix")
+mesh_library = ExtResource("1_gvphh")
 cell_size = Vector3(1, 1, 1)
 data = {
-"cells": PackedInt32Array(0, 0, 0, 0, 1, 262144, 1, 0, 262144, 1, 1, 262144, 65538, 0, 262144, 65538, 1, 262144, 65538, 2, 262144, 65537, 2, 262144, 65536, 2, 262144, 65536, 3, 262144, 65537, 3, 262144, 65538, 3, 262144, 65539, 3, 262144, 65539, 2, 262144, 65539, 1, 262144, 65539, 0, 262144, 131076, 0, 262144, 131076, 1, 262144, 131076, 2, 262144, 131076, 3, 262144, 131076, 4, 262144, 131075, 4, 262144, 131074, 4, 262144, 131073, 4, 262144, 131072, 4, 262144, 131072, 5, 262144, 131073, 5, 262144, 131074, 5, 262144, 131075, 5, 262144, 131076, 5, 262144, 131077, 5, 262144, 131077, 4, 262144, 131077, 3, 262144, 131077, 2, 262144, 131077, 1, 262144, 131077, 0, 262144)
+"cells": PackedInt32Array(0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 2, 2, 0, 1, 2, 0, 0, 2, 0, 65536, 3, 0, 65537, 3, 0, 65538, 3, 0, 65539, 3, 0, 65539, 2, 0, 65539, 1, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65541, 1, 0, 65541, 2, 0, 65541, 3, 0, 65541, 4, 0, 65541, 5, 0, 65540, 5, 0, 65539, 5, 0, 65538, 5, 0, 65537, 5, 0, 65536, 4, 0, 65537, 4, 0, 65536, 5, 0, 65538, 4, 0, 65539, 4, 0, 65540, 4, 0, 65540, 3, 0, 65540, 2, 0, 65540, 1, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131080, 1, 0, 131080, 2, 0, 131080, 3, 0, 131080, 4, 0, 131080, 5, 0, 131079, 5, 0, 131080, 6, 0, 131080, 7, 0, 131079, 7, 0, 131078, 7, 0, 131077, 7, 0, 131080, 8, 0, 131079, 8, 0, 131078, 8, 0, 131077, 8, 0, 131076, 8, 0, 131075, 8, 0, 131074, 8, 0, 131073, 8, 0, 131072, 8, 0, 131072, 7, 0, 131072, 6, 0, 131073, 6, 0, 131074, 6, 0, 131075, 6, 0, 131075, 7, 0, 131076, 6, 0, 131077, 6, 0, 131078, 6, 0, 131079, 6, 0, 131079, 4, 0, 131079, 3, 0, 131079, 2, 0, 131079, 1, 0, 131078, 1, 0, 131078, 2, 0, 131078, 5, 0, 131078, 4, 0, 131078, 3, 0, 131073, 7, 0, 131074, 7, 0, 131076, 7, 0, -1, 65535, 1, 196608, 8, 851968)
 }
 script = ExtResource("2_plxqo")
-metadata/_editor_floor_ = Vector3(0, 0, 0)
+metadata/_editor_floor_ = Vector3(0, 3, 0)
 
 [node name="HighlightMesh" type="MeshInstance3D" parent="GridMap" unique_id=1081435643]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.8074136, 0)
@@ -73,7 +67,8 @@ script = ExtResource("1_70rqm")
 [node name="PlayerCamera" type="Camera3D" parent="CameraController/CameraTarget" unique_id=1116807121]
 current = true
 
-[node name="CameraRayCaster" type="Node3D" parent="CameraController" unique_id=188213917]
+[node name="CameraRayCaster" type="RayCast3D" parent="CameraController" unique_id=634017576]
+target_position = Vector3(0, -1, -100)
 script = ExtResource("4_xgxar")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1111840967]
@@ -84,7 +79,7 @@ omni_range = 4096.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.8074136, 0)
 
 [node name="Unit" type="StaticBody3D" parent="." unique_id=750973152]
-script = ExtResource("6_i28uy")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, 0.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Unit" unique_id=798617606]
 shape = SubResource("BoxShape3D_gvphh")
@@ -92,3 +87,12 @@ shape = SubResource("BoxShape3D_gvphh")
 [node name="UnitMesh" type="MeshInstance3D" parent="Unit" unique_id=418130686]
 mesh = SubResource("BoxMesh_hyud0")
 surface_material_override/0 = SubResource("StandardMaterial3D_gdy8p")
+
+[node name="BoardManager" type="Node" parent="." unique_id=1935214465]
+script = ExtResource("1_gdy8p")
+
+[node name="BoardMaker" type="Node" parent="BoardManager" unique_id=782090146]
+script = ExtResource("8_hyud0")
+
+[node name="TileDictionary" type="Node" parent="BoardManager" unique_id=1026867407]
+script = ExtResource("2_gvphh")
