@@ -5,6 +5,7 @@ signal TileType()
 
 var LastTileHovered = null
 var TileCoords
+
 func RayCast() :
 		#the if statement is there so it doesn't keep running when hitting nothing
 	if is_colliding() :
@@ -28,6 +29,8 @@ func RayCast() :
 		
 func _process(delta: float) -> void:
 	LastTileHovered = RayCast()
-	
-	if Input.is_action_just_pressed("LMB") && (get_collider() != null):
-		TileType.emit(TileCoords , get_collision_normal())
+		
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton : 
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed :
+			TileType.emit(TileCoords , get_collision_normal())

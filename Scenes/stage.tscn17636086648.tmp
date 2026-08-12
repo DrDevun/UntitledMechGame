@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://bv608whspgegc"]
 
-[ext_resource type="Script" uid="uid://dyp7uqehc35jd" path="res://Scenes/board_manager.gd" id="1_gdy8p"]
 [ext_resource type="MeshLibrary" uid="uid://cbibpwbm3fha1" path="res://MeshLibraries/StageBlocks.tres" id="1_gvphh"]
 [ext_resource type="Script" uid="uid://wxu1jkh6ttp7" path="res://Scenes/grid_map.gd" id="2_plxqo"]
 [ext_resource type="Script" uid="uid://dipa2tcslfpma" path="res://Scenes/highlight_mesh.gd" id="3_7nmha"]
@@ -25,7 +24,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 
 [node name="CrosshairPosition" type="ColorRect" parent="Crosshair" unique_id=1727586017]
 custom_minimum_size = Vector2(5, 5)
@@ -37,7 +35,6 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 
 [node name="GridMap" type="GridMap" parent="." unique_id=214189294]
 mesh_library = ExtResource("1_gvphh")
@@ -64,14 +61,17 @@ omni_range = 4096.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.8074136, 0)
 
 [node name="Unit" parent="." unique_id=647161244 instance=ExtResource("5_gvphh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.5, 0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, 0.5)
 
 [node name="BoardManager" parent="." unique_id=1626116938 instance=ExtResource("6_hyud0")]
-script = ExtResource("1_gdy8p")
 
 [node name="CombatUI" type="CanvasLayer" parent="." unique_id=1975949484]
 
 [node name="UnitUI" parent="CombatUI" unique_id=393602114 instance=ExtResource("7_ohi65")]
+DistanceMin = null
+DistanceMax = null
+ScaleMin = null
+ScaleMax = null
 
 [editable path="CameraController"]
 [editable path="BoardManager"]

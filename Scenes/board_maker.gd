@@ -53,7 +53,7 @@ func LoadBoard() :
 		Board[Coord.x][Coord.y][Coord.z] = $"../TileDictionary".Translator(TileID)
 	
 	#just a unit test
-	(Board[0][1][0]) = $"../TileDictionary".Translator(2)
+	(Board[0][2][0]) = $"../TileDictionary".Translator(2)
 	
 	return Board
 

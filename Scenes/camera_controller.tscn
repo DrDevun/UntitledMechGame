@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c13q07coqey1t"]
+
+[ext_resource type="Script" uid="uid://nai80b85rp6t" path="res://Scenes/player_camera.gd" id="1_vx6fv"]
+[ext_resource type="Script" uid="uid://c1ao7xrk34y0n" path="res://Scenes/camera_ray_caster.gd" id="2_jch55"]
+
+[node name="CameraController" type="Node3D" unique_id=1854931062]
+script = ExtResource("1_vx6fv")
+
+[node name="CameraTarget" type="Node3D" parent="." unique_id=680586776]
+
+[node name="PlayerCamera" type="Camera3D" parent="CameraTarget" unique_id=1537099721]
+current = true
+
+[node name="CameraRayCaster" type="RayCast3D" parent="." unique_id=1244947063]
+target_position = Vector3(0, -1, -100)
+script = ExtResource("2_jch55")

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://c5cxd6ea6ifd7"]
+
+[ext_resource type="Script" uid="uid://deja1gjnw2y8p" path="res://Scenes/board_maker.gd" id="1_xab64"]
+[ext_resource type="Script" uid="uid://dgon6epfnti5j" path="res://Scenes/tile_dictionary.gd" id="2_1h6ic"]
+
+[node name="BoardManager" type="Node" unique_id=1626116938]
+
+[node name="BoardMaker" type="Node" parent="." unique_id=1698867964]
+script = ExtResource("1_xab64")
+
+[node name="TileDictionary" type="Node" parent="." unique_id=790340598]
+script = ExtResource("2_1h6ic")

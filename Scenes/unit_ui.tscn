@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://desl2i3voewu6"]
+
+[ext_resource type="Script" uid="uid://dctqoqf26ddy8" path="res://Scenes/unit_ui.gd" id="1_gqgi2"]
+
+[node name="UnitUI" type="PanelContainer" unique_id=393602114]
+offset_right = 100.0
+offset_bottom = 124.0
+script = ExtResource("1_gqgi2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1055229545]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 0
+theme_override_constants/separation = 0
+
+[node name="Move" type="Button" parent="VBoxContainer" unique_id=991137388]
+layout_mode = 2
+size_flags_vertical = 4
+text = "MOVE"
