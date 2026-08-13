@@ -10,8 +10,8 @@ func _ready() -> void:
 	
 func ShowUI(TileType, TileNormal) :
 	hide()
-	#Checks if the RayCast hits a unit
-	if $"../../BoardManager/BoardMaker".Board[TileType.x][TileType.y][TileType.z] is TileDictionary.TestUnit :
+	#Checks if the RayCast hits a unit and if its the right interactionstate
+	if $"../../BoardManager/BoardMaker".Board[TileType.x][TileType.y][TileType.z] is TileDictionary.TestUnit && $"../../StateManager".InteractionState == StateManager.InteractionStates.Normal:
 		show()
 	else :
 		hide()

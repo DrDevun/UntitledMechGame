@@ -23,7 +23,7 @@ func RayCast() :
 		
 		#only sends a signal when the tile actually changes
 		if LastTileHovered != [TileCoords] :
-			TilePos.emit(TileCoords , TileLocalPos)
+			TilePos.emit(TileLocalPos)
 		
 		return [TileCoords]
 		

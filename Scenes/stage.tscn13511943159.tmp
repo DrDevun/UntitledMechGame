@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dyp7uqehc35jd" path="res://Scenes/board_manager.gd" id="1_gdy8p"]
 [ext_resource type="MeshLibrary" uid="uid://jv3ja18i8kt0" path="res://MeshLibraries/Tiles.tres" id="1_gvphh"]
 [ext_resource type="Script" uid="uid://chx3xjnbqq67f" path="res://Scenes/combat_manager.gd" id="1_hyud0"]
-[ext_resource type="Script" uid="uid://by4kyxlw3u3n3" path="res://Scenes/interaction_state_manager.gd" id="1_ohi65"]
 [ext_resource type="Script" uid="uid://wxu1jkh6ttp7" path="res://Scenes/grid_map.gd" id="2_plxqo"]
 [ext_resource type="Script" uid="uid://dipa2tcslfpma" path="res://Scenes/highlight_mesh.gd" id="3_7nmha"]
 [ext_resource type="PackedScene" uid="uid://c13q07coqey1t" path="res://Scenes/camera_controller.tscn" id="4_gdy8p"]
@@ -18,9 +17,6 @@ transparency = 1
 albedo_color = Color(1, 0, 0, 0.19607843)
 
 [node name="Stage" type="Node" unique_id=1333579561]
-
-[node name="StateManager" type="Node" parent="." unique_id=713768156]
-script = ExtResource("1_ohi65")
 
 [node name="CombatManager" type="Node" parent="." unique_id=519652907]
 script = ExtResource("1_hyud0")

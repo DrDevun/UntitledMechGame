@@ -13,6 +13,9 @@ func TileSelector(TileCoords, TileNormal) :
 	LastSelectedTileCoords = TileCoords
 	LastSelectedTileNormal = TileNormal
 
+func SetTile (TileCoords : Vector3i, TileType) :
+	$BoardMaker.Board[TileCoords.x][TileCoords.y][TileCoords.z] = TileType
+
 func MoveObject (OldCoords : Vector3i, NewCoords : Vector3i) : 
 	$BoardMaker.Board[NewCoords.x][NewCoords.y][NewCoords.z] = LastSelectedTile
 	$BoardMaker.Board[OldCoords.x][OldCoords.y][OldCoords.z] = null
@@ -31,4 +34,5 @@ func OnMoveButtonPressed() :
 		MoveObjectByMouse(OldCoords, LastSelectedTileCoords, LastSelectedTileNormal)
 		LastSelectedTile = null
 
-	
+func GetTileType (TileCoords : Vector3i) :
+	return $BoardMaker.Board[TileCoords.x][TileCoords.y][TileCoords.z]
