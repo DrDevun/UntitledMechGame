@@ -15,16 +15,8 @@ albedo_color = Color(0.19607843, 0.1764706, 0.05882353, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x4ujs"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_plgeh"]
-transparency = 1
-albedo_color = Color(0.19607843, 0.1764706, 0.05882353, 0.78431374)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4ujs"]
 albedo_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1tmtx"]
-transparency = 1
-albedo_color = Color(0.19607843, 0.19607843, 0.19607843, 0.5882353)
 
 [node name="StageBlocks" type="Node3D" unique_id=751919432]
 
@@ -52,11 +44,6 @@ visible = false
 visible = false
 shape = SubResource("BoxShape3D_x4ujs")
 
-[node name="TDirt" type="MeshInstance3D" parent="." unique_id=1983005271]
-visible = false
-mesh = SubResource("BoxMesh_n2cey")
-surface_material_override/0 = SubResource("StandardMaterial3D_plgeh")
-
 [node name="Stone" type="MeshInstance3D" parent="." unique_id=1794395247]
 visible = false
 mesh = SubResource("BoxMesh_n2cey")
@@ -68,8 +55,3 @@ visible = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stone/StaticBody3D" unique_id=194042296]
 visible = false
 shape = SubResource("BoxShape3D_x4ujs")
-
-[node name="TStone" type="MeshInstance3D" parent="." unique_id=2086124280]
-visible = false
-mesh = SubResource("BoxMesh_n2cey")
-surface_material_override/0 = SubResource("StandardMaterial3D_1tmtx")

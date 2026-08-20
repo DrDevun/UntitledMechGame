@@ -7,32 +7,44 @@ var LastSelectedTileNormal = null
 func _ready() -> void:
 	$"../CameraController/CameraRayCaster".TileType.connect(TileSelector)
 	$"../CombatUI/UnitUI/VBoxContainer/Move".pressed.connect(OnMoveButtonPressed)
-	
+
+func ValidateTile (TileCoords : Vector3i) :
+	assert(TileCoords.x >=0, "Negative X Coordinate")
+	assert(TileCoords.y >=0, "Negative Y Coordinate")
+	assert(TileCoords.z >=0, "Negative Z Coordinate")
+
+func RemoveSpawners() :
+	for Coords in $BoardMaker.PlayerSpawnerCoords :
+		if GetTileType(Coords) is TileDictionary.PlayerSpawner :
+			SetTile(Coords, null)
+	$"../PlayerSpawners".queue_free()
+
 func TileSelector(TileCoords, TileNormal) : 
-	LastSelectedTile = $BoardMaker.Board[TileCoords.x][TileCoords.y][TileCoords.z]
+	LastSelectedTile = GetTileType(TileCoords)
 	LastSelectedTileCoords = TileCoords
 	LastSelectedTileNormal = TileNormal
 
 func SetTile (TileCoords : Vector3i, TileType) :
+	ValidateTile(TileCoords)
 	$BoardMaker.Board[TileCoords.x][TileCoords.y][TileCoords.z] = TileType
 
+func GetTileType (TileCoords : Vector3i) :
+	return $BoardMaker.Board[TileCoords.x][TileCoords.y][TileCoords.z]
+
 func MoveObject (OldCoords : Vector3i, NewCoords : Vector3i) : 
-	$BoardMaker.Board[NewCoords.x][NewCoords.y][NewCoords.z] = LastSelectedTile
-	$BoardMaker.Board[OldCoords.x][OldCoords.y][OldCoords.z] = null
+	SetTile(NewCoords, LastSelectedTile)
+	SetTile(OldCoords, null)
 
 func MoveObjectByMouse (OldCoords : Vector3i, NewCoords : Vector3i, TileNormal : Vector3i) :
-	$BoardMaker.Board[NewCoords.x + TileNormal.x][NewCoords.y + TileNormal.y][NewCoords.z + TileNormal.z] = LastSelectedTile
-	$BoardMaker.Board[OldCoords.x][OldCoords.y][OldCoords.z] = null
+	SetTile(NewCoords + TileNormal, LastSelectedTile)
+	SetTile(OldCoords, null)
 	$"../Unit".position = $"../GridMap".map_to_local(NewCoords) + Vector3(TileNormal)
 
 func OnMoveButtonPressed() :
 	var OldCoords = LastSelectedTileCoords
-	var Unit = LastSelectedTile
+	var SelectedUnit = LastSelectedTile
 	await $"../CameraController/CameraRayCaster".TileType
 	if LastSelectedTile is not TileDictionary.TestUnit :
-		LastSelectedTile = Unit
+		LastSelectedTile = SelectedUnit
 		MoveObjectByMouse(OldCoords, LastSelectedTileCoords, LastSelectedTileNormal)
 		LastSelectedTile = null
-
-func GetTileType (TileCoords : Vector3i) :
-	return $BoardMaker.Board[TileCoords.x][TileCoords.y][TileCoords.z]

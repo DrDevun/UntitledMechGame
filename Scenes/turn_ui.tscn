@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dy81wq6abuqsh"]
+
+[ext_resource type="Script" uid="uid://ctr3cutkjn2wa" path="res://Scripts/turn_ui.gd" id="1_q2s4e"]
+
+[node name="TurnUI" type="PanelContainer" unique_id=673271864]
+offset_right = 90.0
+offset_bottom = 40.0
+script = ExtResource("1_q2s4e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1171123295]
+layout_direction = 3
+layout_mode = 2
+
+[node name="EndTurn" type="Button" parent="VBoxContainer" unique_id=363751169]
+layout_mode = 2
+text = "END TURN"

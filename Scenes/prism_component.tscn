@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bnay0ro35jbsx"]
+
+[ext_resource type="Script" uid="uid://wnbhw6aeoyls" path="res://Scripts/prism_component.gd" id="1_bu5u3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_npr28"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_bu5u3"]
+left_to_right = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2mtdh"]
+
+[node name="PrismComponent" type="StaticBody3D" unique_id=297484328]
+collision_layer = 2
+script = ExtResource("1_bu5u3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1660309554]
+shape = SubResource("BoxShape3D_npr28")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=797847236]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("PrismMesh_bu5u3")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=2146698844]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_2mtdh")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D2" unique_id=1230769696]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+mesh = SubResource("PrismMesh_bu5u3")

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://desl2i3voewu6"]
 
-[ext_resource type="Script" uid="uid://dctqoqf26ddy8" path="res://Scenes/unit_ui.gd" id="1_gqgi2"]
+[ext_resource type="Script" uid="uid://dctqoqf26ddy8" path="res://Scripts/unit_ui.gd" id="1_gqgi2"]
 
 [node name="UnitUI" type="PanelContainer" unique_id=393602114]
 offset_right = 100.0

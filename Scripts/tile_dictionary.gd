@@ -19,7 +19,7 @@ func Translator(TileID) :
 			return PlayerSpawner.new()
 		1 :
 			return Dirt.new()
-		3 :
+		2 :
 			return Stone.new()
 		_ : 
 			return null

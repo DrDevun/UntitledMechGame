@@ -5,18 +5,17 @@ extends PanelContainer
 
 
 func _ready() -> void:
-	$"../../CameraController/CameraRayCaster".TileType.connect(ShowUI)
 	hide()
 	
-func ShowUI(TileType, TileNormal) :
+func ShowUI(TileType : Vector3i, _TileNormal : Vector3i) :
 	hide()
-	#Checks if the RayCast hits a unit and if its the right interactionstate
-	if $"../../BoardManager/BoardMaker".Board[TileType.x][TileType.y][TileType.z] is TileDictionary.TestUnit && $"../../StateManager".InteractionState == StateManager.InteractionStates.Normal:
+	#Checks if the RayCast hits a unit
+	if $"../../BoardManager/BoardMaker".Board[TileType.x][TileType.y][TileType.z] is TileDictionary.TestUnit :#&& $"../../StateManager".InteractionState == $"../../StateManager".InteractionStates.Normal:
 		show()
 	else :
 		hide()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	
 	#checks if the UI is actually active
 	if is_visible_in_tree() :

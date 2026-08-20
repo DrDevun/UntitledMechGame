@@ -5,9 +5,9 @@ extends Node
 #The logical board is a series of nested arrays.
 #This script first declares an empty array
 var Board = []
-
 var PlayerSpawnerScene = preload("res://Scenes/player_spawner.tscn")
-var PlayerSpawnerPositions = []
+var PlayerSpawnerCoords = []
+
 
 
 func CreateBoard (Size : Vector3i) : 
@@ -51,8 +51,9 @@ func FindBoardSize() :
 			MaxY = Coords.y
 		if Coords.z >= MaxZ :
 			MaxZ = Coords.z
-
+	
 	return Vector3i(MaxX - MinX + 1, MaxY - MinY + 1, MaxZ - MinZ + 1)
+
 
 
 
@@ -72,16 +73,17 @@ func FillPlayerSpawners(Coord : Vector3i) :
 	#Then removes the spawner visual from the grid
 	$"../../GridMap".set_cell_item(Coord, -1, 0)
 	
-	PlayerSpawnerPositions.append(Coord)
+	PlayerSpawnerCoords.append(Coord)
 
 
 
 func FillBoard() :
 	Board = (CreateBoard(FindBoardSize()))
-
+	
 	#Get_used_cells() generates an array containing Vector3is of all coordinates that have a tile in them
 	#Then get_cell_item() gets the ID of the tile in that coordinate
 	for Coord in $"../../GridMap".get_used_cells() :
+		
 		var TileID = $"../../GridMap".get_cell_item(Coord)
 
 		#Checks if a tile is a player spawner
@@ -90,10 +92,6 @@ func FillBoard() :
 			
 		#.Translator turns the tile id into actual instances of tile objects with data and puts it into the corresponding coordinate
 		Board[Coord.x][Coord.y][Coord.z] = $"../TileDictionary".Translator(TileID)
-
-	#just a unit test
-	(Board[0][2][0]) = TileDictionary.TestUnit.new()
-
 	return Board
 
 
