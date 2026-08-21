@@ -6,8 +6,6 @@
 transparency = 1
 albedo_color = Color(1, 1, 0, 0.78431374)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_1tmtx"]
-
 [sub_resource type="BoxMesh" id="BoxMesh_n2cey"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mp00n"]
@@ -24,13 +22,6 @@ albedo_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
 visible = false
 mesh = SubResource("BoxMesh_mp00n")
 surface_material_override/0 = SubResource("StandardMaterial3D_n2cey")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="PlayerSpawn" unique_id=556510563]
-visible = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerSpawn/StaticBody3D" unique_id=587041578]
-visible = false
-shape = SubResource("BoxShape3D_1tmtx")
 
 [node name="Dirt" type="MeshInstance3D" parent="." unique_id=148612614]
 visible = false

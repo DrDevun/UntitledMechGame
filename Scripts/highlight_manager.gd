@@ -1,7 +1,20 @@
 extends Node
 
-func HighlightUnit(UnitPos : Vector3, TileNormal : Vector3i, SelectedUnit) :
-	if $"../BoardManager".GetTileType(Vector3i(UnitPos)) is TileDictionary.PlayerSpawner :
-		SelectedUnit.position = UnitPos
-	else :
+func _ready() -> void:
+	$"../GridMap/HighlightMesh".visible = false
+
+func MoveUnitHighlight(UnitPos : Vector3, TileNormal : Vector3i, SelectedUnit : Unit, IsValidTile : bool) :
+	if IsValidTile :
+		SelectedUnit.visible = true
 		SelectedUnit.position = UnitPos + Vector3(TileNormal)
+	else : SelectedUnit.visible = false
+	
+	
+
+func MoveSelectorHighlight(TileLocalPos, _TileNormal, IsValidTile) :
+	if IsValidTile :
+		$"../GridMap/HighlightMesh".visible = true
+		$"../GridMap/HighlightMesh".position = TileLocalPos
+	else : 
+		$"../GridMap/HighlightMesh".visible = false
+	

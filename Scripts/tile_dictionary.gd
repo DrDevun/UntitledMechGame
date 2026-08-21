@@ -12,6 +12,9 @@ class Dirt :
 
 class Stone : 
 	var HP = 3
+	
+class Air :
+	pass
 
 func Translator(TileID) :
 	match TileID :
@@ -21,5 +24,5 @@ func Translator(TileID) :
 			return Dirt.new()
 		2 :
 			return Stone.new()
-		_ : 
-			return null
+		-1 : 
+			return Air

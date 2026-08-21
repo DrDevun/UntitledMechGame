@@ -9,9 +9,8 @@ func _ready() -> void:
 	$"../CombatUI/UnitUI/VBoxContainer/Move".pressed.connect(OnMoveButtonPressed)
 
 func ValidateTile (TileCoords : Vector3i) :
-	assert(TileCoords.x >=0, "Negative X Coordinate")
-	assert(TileCoords.y >=0, "Negative Y Coordinate")
-	assert(TileCoords.z >=0, "Negative Z Coordinate")
+	if TileCoords.x < 0 or TileCoords.x >= $BoardMaker.BoardSize.x or TileCoords.y < 0 or TileCoords.y >= $BoardMaker.BoardSize.y or TileCoords.z < 0 or TileCoords.z >= $BoardMaker.BoardSize.z :
+		assert(false)
 
 func RemoveSpawners() :
 	for Coords in $BoardMaker.PlayerSpawnerCoords :
@@ -28,8 +27,10 @@ func SetTile (TileCoords : Vector3i, TileType) :
 	ValidateTile(TileCoords)
 	$BoardMaker.Board[TileCoords.x][TileCoords.y][TileCoords.z] = TileType
 
-func GetTileType (TileCoords : Vector3i) :
+func GetTileType (TileCoords : Vector3i) -> Object:
+	ValidateTile(TileCoords)
 	return $BoardMaker.Board[TileCoords.x][TileCoords.y][TileCoords.z]
+	
 
 func MoveObject (OldCoords : Vector3i, NewCoords : Vector3i) : 
 	SetTile(NewCoords, LastSelectedTile)

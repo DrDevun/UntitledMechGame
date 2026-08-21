@@ -70,6 +70,11 @@ func CanHighlightUnit() -> bool :
 		return true
 	return false
 
+func CanHighlight () -> bool :
+	if InteractionState != InteractionStates.Placing :
+		return true
+	return false
+	
 func CanPlaceUnit() -> bool :
 	if GameState == GameStates.Deployment && InteractionState == InteractionStates.Placing :
 		return true
@@ -87,12 +92,18 @@ func CanAct () -> bool :
 
 
 
-func HandleHover(TilePos : Vector3, TileNormal : Vector3i) :
+func HandleHover(TilePos : Vector3, TileNormal : Vector3i, IsValidTile : bool) :
 	if CanHighlightUnit() :
-		$"../HighlightManager".HighlightUnit(TilePos, TileNormal, $"../CombatManager".SelectedUnit)
-
+		$"../HighlightManager".MoveUnitHighlight(TilePos, TileNormal, $"../CombatManager".SelectedUnit, IsValidTile)
+	
+	if CanHighlight() :
+		$"../HighlightManager".MoveSelectorHighlight(TilePos, TileNormal, IsValidTile)
+	else : $"../GridMap/HighlightMesh".visible = false
 
 func HandleClick(TileCoords : Vector3i, TileNormal : Vector3i) :
+	
+	#If an action can fail, its function has a bool return type
+	#S that it doesnt change game state upon fail
 	if CanPlaceUnit() :
 		if $"../CombatManager".PlaceUnit(TileCoords, TileNormal) :
 			InteractionState = InteractionStates.Selecting
