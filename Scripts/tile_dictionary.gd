@@ -13,16 +13,16 @@ class Dirt :
 class Stone : 
 	var HP = 3
 	
-class Air :
+class Empty :
 	pass
 
 func Translator(TileID) :
 	match TileID :
 		0 :
-			return PlayerSpawner.new()
+			return PlayerSpawner
 		1 :
 			return Dirt.new()
 		2 :
 			return Stone.new()
 		-1 : 
-			return Air
+			return Empty

@@ -21,9 +21,8 @@ func CreateBoard (Size : Vector3i) -> Array :
 			
 			#Board[x][y] gets the array in index x and inside, gets the array in index y, then .append(null)s null to each array represent the z coordinates
 			for z in range(Size.z) :
-				Board[x][y].append(TileDictionary.Air)
+				Board[x][y].append(TileDictionary.Empty)
 	return Board
-
 
 
 func FindBoardSize() -> Vector3i: 
@@ -62,6 +61,9 @@ func FillBoard() -> Array:
 	for Coord in $"../../GridMap".get_used_cells() :
 		
 		var TileID = $"../../GridMap".get_cell_item(Coord)
+		
+		if TileID == 0 :
+			PlayerSpawnerCoords.append(Coord)
 
 		#.Translator turns the tile id into actual instances of tile objects with data and puts it into the corresponding coordinate
 		Board[Coord.x][Coord.y][Coord.z] = $"../TileDictionary".Translator(TileID)

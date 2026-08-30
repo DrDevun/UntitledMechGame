@@ -18,6 +18,7 @@ enum Turn {
 }
 
 
+	
 
 func _ready() :
 	$"../CameraController/CameraRayCaster".TileType.connect(HandleClick)
@@ -33,6 +34,20 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("OpenTurnUI") :
 		if CanOpenTurnUI() :
 			$"../CombatUI/TurnUI".ShowUI()
+	
+	if CanRotateUnit() :
+		if Input.is_action_just_pressed("Rotate+x") :
+			$"../CombatManager".RotateUnit(Vector3i(1,0,0))
+		if Input.is_action_just_pressed("Rotate-x") :
+			$"../CombatManager".RotateUnit(Vector3i(-1,0,0))
+		if Input.is_action_just_pressed("Rotate+y") :
+			$"../CombatManager".RotateUnit(Vector3i(0,1,0))
+		if Input.is_action_just_pressed("Rotate-y") :
+			$"../CombatManager".RotateUnit(Vector3i(0,-1,0))
+		if Input.is_action_just_pressed("Rotate+z") :
+			$"../CombatManager".RotateUnit(Vector3i(0,0,+1))
+		if Input.is_action_just_pressed("Rotate-z") :
+			$"../CombatManager".RotateUnit(Vector3i(0,0,-1))
 
 func NextTurn () :
 	
@@ -60,10 +75,15 @@ func EndTurn () :
 		print("CANNOT END TURN")
 	$"../CombatUI/TurnUI".hide()
 
-
+func CanRotateUnit() :
+	if InteractionState == InteractionStates.Placing && GameState == GameStates.Deployment :
+		return true
+	return false
 
 func CanOpenTurnUI () :
-	return true 
+	if InteractionState != InteractionStates.Placing :
+		return true
+	return false 
 
 func CanHighlightUnit() -> bool :
 	if GameState == GameStates.Deployment && InteractionState == InteractionStates.Placing :

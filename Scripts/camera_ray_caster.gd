@@ -108,7 +108,7 @@ func SurfaceMode() -> Array:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("MMB") :
 		SwitchMode()
-		print($"../../BoardManager/BoardMaker".Board[0][4][0])
+
 	
 	
 	if SelectionMode == SelectionModes.Surface :

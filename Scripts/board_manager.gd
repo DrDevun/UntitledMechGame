@@ -10,12 +10,14 @@ func _ready() -> void:
 
 func ValidateTile (TileCoords : Vector3i) :
 	if TileCoords.x < 0 or TileCoords.x >= $BoardMaker.BoardSize.x or TileCoords.y < 0 or TileCoords.y >= $BoardMaker.BoardSize.y or TileCoords.z < 0 or TileCoords.z >= $BoardMaker.BoardSize.z :
+		print(TileCoords)
 		assert(false)
 
 func RemoveSpawners() :
 	for Coords in $BoardMaker.PlayerSpawnerCoords :
 		if GetTileType(Coords) is TileDictionary.PlayerSpawner :
 			SetTile(Coords, null)
+		$"../GridMap".set_cell_item(Coords, -1, 0)
 	$"../PlayerSpawners".queue_free()
 
 func TileSelector(TileCoords, TileNormal) : 
@@ -30,7 +32,6 @@ func SetTile (TileCoords : Vector3i, TileType) :
 func GetTileType (TileCoords : Vector3i) -> Object:
 	ValidateTile(TileCoords)
 	return $BoardMaker.Board[TileCoords.x][TileCoords.y][TileCoords.z]
-	
 
 func MoveObject (OldCoords : Vector3i, NewCoords : Vector3i) : 
 	SetTile(NewCoords, LastSelectedTile)
