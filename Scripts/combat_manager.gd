@@ -46,7 +46,7 @@ func PlaceUnit(TileCoords : Vector3i, TileNormal: Vector3i) -> bool:
 	for Component in SelectedUnit.Components :
 		var Distance : float = abs(Vector3(Component.LocalPosition).dot(-TileNormal))
 		if Distance > MaxShift :
-			MaxShift = Distance
+			MaxShift = int(Distance)
 	
 	print("MaxShift = ", MaxShift)
 	for Component in SelectedUnit.Components :

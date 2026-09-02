@@ -2,12 +2,24 @@ class_name Unit
 extends Node3D
 
 var Components : Array[UnitComponent] = []
-var ComponentLocalCoords : Array[Vector3i] = []
+var UnitLocalCoords : Array[Vector3i] = []
 var AnchorLocalCoords := Vector3i(0,0,0)
 
-func GetComponentLocalCoords() :
-	pass
-	
+func GetUnitLocalCoords() :
+	for Component : UnitComponent in Components : 
+		var ComponentLocalCoords = GetComponentLocalCoords(Component)
+		for TileCoord : Vector3i in ComponentLocalCoords :
+			UnitLocalCoords.append(TileCoord + Component.LocalPosition)
+			print("LOCALCOORD", TileCoord)
+			print("LOCALPOS", Component.LocalPosition)
+			print("------------")
+			assert(false, "CALL NEVAN")
+
+func GetComponentLocalCoords(Component : UnitComponent) -> Array[Vector3i] :
+	var ComponentLocalCoords : Array[Vector3i]
+	for Tile : Vector3i in Component.Shape :
+		ComponentLocalCoords.append(Vector3i(Vector3(Tile) * Component.LocalRotation))
+	return ComponentLocalCoords
 
 func GetAABB() -> AABB:
 	var Min := Vector3i(-INF, -INF, -INF)
@@ -29,7 +41,7 @@ func GetAABB() -> AABB:
 	return UnitAABB
 	
 	
-func AddComponent(Type : PackedScene, Coords : Vector3i, Rotation : Vector3) :
+func AddComponent(Type : PackedScene, Coords : Vector3i, Rotation : Basis) :
 	
 	#Logical data
 	var Component := Type.instantiate() as UnitComponent
@@ -41,7 +53,8 @@ func AddComponent(Type : PackedScene, Coords : Vector3i, Rotation : Vector3) :
 	#Physical Mesh
 	add_child(Component)
 	Component.position = Vector3(Coords)
-	Component.rotation = Rotation
+	Component.rotation = Rotation.get_euler()
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton : 
@@ -49,6 +62,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			pass
 
 func _ready() -> void:
-	AddComponent(ComponentLibrary.Basic ,Vector3i(0,0,0), Vector3.ZERO)
-	AddComponent(ComponentLibrary.Prism ,Vector3i(0,0,1), Vector3(0,PI/2,0))
-	AddComponent(ComponentLibrary.Prism ,Vector3i(1,0,0), Vector3(0,PI,0))
+	AddComponent(ComponentLibrary.Basic ,Vector3i(0,0,0), Basis.from_euler(Vector3.ZERO))
+	AddComponent(ComponentLibrary.Prism ,Vector3i(0,0,1), Basis.from_euler(Vector3(PI/2,PI/2,0)))
+	AddComponent(ComponentLibrary.Prism ,Vector3i(1,0,0), Basis.from_euler(Vector3(0,PI,0)))
+	GetUnitLocalCoords()
+	
+	print(UnitLocalCoords)
